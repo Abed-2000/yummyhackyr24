@@ -1,0 +1,33 @@
+        <!-- Main Content -->
+        <div class="row w-100 pt-5 align-items-center">
+            <div class="col">
+            <div class="container">
+                <h2 id="mealstitle">Custom Meal Search</h2>
+                <hr>
+                <div id="startRecipesObject"></div>
+                {% for meal in data['meals'] %}
+                    <div class="row w-100 p-1">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <img alt="food image" src="{{ meal.strMealThumb }}" class="img-fluid">
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title">{{ meal.strMeal }}</h5>
+                                            <p class="card-text">{{ meal.idMeal}}</p>
+                                            <a href="/recipe/{{ meal.idMeal}}" class="btn btn-primary">View Recipe</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

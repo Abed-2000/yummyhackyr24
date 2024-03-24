@@ -80,11 +80,12 @@ def search():
         query = request.form.get('query')
         if query:
             result = mealAPI.searchMealsByName(query)
-            return render_template("search.html", data=result)
+            return render_template("customsearch.html", data=result)
         else:
             return 'No query provided'
     else:
-        return render_template("search.html")
+        return render_template("recipes.html")
+
 
 @app.route("/recipe/<int:mealID>", methods=['GET'])
 def show_recipe(mealID):
