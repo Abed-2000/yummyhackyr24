@@ -95,7 +95,22 @@ def searchMealsByName(query):
     return res
 
 def getMealsByCategory(query):
-    url = 'www.themealdb.com/api/json/v1/1/filter.php?c='
+    url = "http://www.themealdb.com/api/json/v1/1/filter.php?c="
     endpoint = url + str(query)
     res = req.get(endpoint)
     return res.json()
+
+def getMealCategories():
+    url = "http://www.themealdb.com/api/json/v1/1/categories.php"
+    try:
+        res = req.get(url)
+        res.raise_for_status()
+        categories_data = res.json()
+        category_list = []
+        for category_data in categories_data['categories']:
+            category_name = category_data['strCategory']
+            category_list.append(category_name)
+        return category_list
+    except req.exceptions.RequestException as e:
+        print("Failed to fetch categories:", e)
+        return []
