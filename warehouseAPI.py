@@ -31,8 +31,3 @@ def checkTarget(query):
         else:
             return ("Target"), (query), ("Not found.")
             
-
-
-print(checkWalmart("apple"))
-print(checkShoprite("apple"))
-print(checkTarget("apple"))
