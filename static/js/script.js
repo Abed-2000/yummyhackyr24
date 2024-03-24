@@ -13,7 +13,6 @@ function getAllRecipes(category){
             var startingObject = document.getElementById('startRecipesObject');
 
             for (x=0; x < response['meals'].length; x++){
-                //display each meal
                 var mealName = response['meals'][x]['strMeal'];
                 var mealCode = response['meals'][x]['idMeal'];
                 var mealPicture = response['meals'][x]['strMealThumb'];
@@ -28,3 +27,18 @@ function getAllRecipes(category){
     var data = JSON.stringify({"category": category});
     xhr.send(data);
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    var likeButton = document.getElementById('like-button');
+    likeButton.addEventListener('click', function () {
+    if (likeButton.classList.contains('btn-secondary')) {                
+        likeButton.classList.remove('btn-secondary');
+        likeButton.classList.add('btn-danger');
+        likeButton.innerText = 'Liked!';
+    } else {
+        likeButton.classList.remove('btn-danger');
+        likeButton.classList.add('btn-secondary');
+        likeButton.innerText = 'Like <3';
+    }
+    });
+});

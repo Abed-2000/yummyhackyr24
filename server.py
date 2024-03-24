@@ -61,6 +61,10 @@ def home():
     else:
         return render_template("login.html")
     
+@app.route("/about")
+def aboutus():
+    return render_template('aboutus.html')
+    
 @app.route("/recipes")
 def allrecipes():
     categories = mealAPI.getMealCategories()
@@ -176,7 +180,7 @@ def show_basket(mealID):
             'most_common_store': most_common_store
         }
 
-        return render_template("basket.html", data=data)
+        return render_template("cost.html", data=data)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <br><br>
+    <div class="container p-1">
+    {% if data %}
+        <div class="row">
+            <div class="col-4">
+                <h1 class="p-3">{{ data.name }}</h1>
+                <h2>{{ data.area }} {{ data.category }}</h2>
+                <img class= "pt-2 img-fluid" src="{{ data.thumb }}" alt="food image"/>
+                <br>
+                <h2 class="p-3">Store with the best bang for your &#128181;:</h2>
+                <h2> &#10024; {{ data.most_common_store }} &#10024;</h2>
+                <hr>
+                <h2 class="p-3">Best Place to Buy Each Ingredient:</h2>
+                <ul>
+                    {% for ingredient, store in data.cheapest.items() %}
+                        <li>{{ ingredient }} - {{ store }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="p-5 col text-center">
+                <h2>Vendor Cost Overview:</h2>
+                <div class="row align-center">
+                <div class="col">
+                <table class="w-50 mx-auto text-center">
+                    <tr>
+                        <th>Store</th>
+                        <th>Ingredient</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for store, ingredient, price in data.ingredient_prices %}
+                        <tr>
+                            <td>{{ store }}</td>
+                            <td>{{ ingredient }}</td>
+                            <td>${{ price }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

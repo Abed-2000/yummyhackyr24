@@ -5,7 +5,6 @@
     <br><br>
     <div class="container p-1">
 
-
     {% if data %}
         <h1>{{ data.name }}</h1>
         <h2 class="p-2">{{ data.area }} {{ data.category }}</h2>
@@ -15,7 +14,7 @@
                 <img class= "pt-2 img-fluid" src="{{ data.thumb }}" alt="food image"/>
                 <br>
                 <div class="pt-3">
-                    <button class="btn btn-secondary" type="button">Like &lt;3</button>
+                    <button id="like-button" class="btn btn-secondary" type="button">Like &lt;3</button>
                 </div>
                 <div class="pt-3">
                     <h2>Ingredients:</h2>
@@ -28,7 +27,6 @@
                 <div class="pt-3">
                     <a class="btn btn-success" href="/basket/{{data.id}}">Find in Store</a>              
                 </div>
-
             </div>
             <div class="col">
                 <h2>Instructions:</h2>
@@ -42,8 +40,28 @@
         <hr>
         <br>
 
-    </div>
-
-
+        <div class="pt-5">
+            <h2>Discussion Board</h2>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                <div class="form-group">
+                    <label for="comment">Add Your Comment:</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            <br>
+            <div class="comments pt-3">
+                <h3>Comments:</h3>
+                {% for comment in comments %}
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+                <br><br><hr><br>
+            </div>
+        </div>
     {% endif %}
+    </div>
 {% endblock %}
