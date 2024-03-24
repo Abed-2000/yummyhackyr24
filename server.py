@@ -81,7 +81,9 @@ def show_recipe(mealID):
         instructions = mealAPI.getInstructions(mealID)
         ingredients = mealAPI.getIngredients(mealID)
         measurements = mealAPI.getMeasurements(mealID)
-        youtube = mealAPI.getYoutube(mealID)
+        youtube_link = mealAPI.getYoutube(mealID)
+        youtube_id = mealAPI.extract_youtube_id(youtube_link)
+        youtube_embed_url = f"https://www.youtube.com/embed/{youtube_id}?autoplay=1&mute=1"
         
         ingredient_list = [{"ingredient": ing, "measurement": meas} for ing, meas in zip(ingredients, measurements)]
 
@@ -92,7 +94,7 @@ def show_recipe(mealID):
             'category': category,
             'instructions': instructions,
             'ingredients': ingredient_list,
-            'youtube': youtube
+            'youtube': youtube_embed_url
         }
         
         return render_template("recipe.html", data=data)
@@ -113,7 +115,6 @@ def show_basket(mealID):
             'thumb': thumb,
             'ingredients': ingredients
         }
-
         return render_template("basket.html", data=data)
 
 @app.route("/recipes")
