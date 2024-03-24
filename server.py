@@ -75,6 +75,7 @@ def defaultRecipe():
 @app.route("/recipe/<int:mealID>", methods=['GET'])
 def show_recipe(mealID):
     if request.method == 'GET':
+        id = mealID
         name = mealAPI.getMealName(mealID)
         thumb = mealAPI.getMealThumb(mealID)
         area = mealAPI.getMealArea(mealID)
@@ -87,6 +88,7 @@ def show_recipe(mealID):
         youtube_embed_url = f"https://www.youtube.com/embed/{youtube_id}"
 
         data = {
+            'id': id,
             'name': name,
             'thumb': thumb,
             'area': area,
@@ -96,7 +98,23 @@ def show_recipe(mealID):
             'youtube': youtube_embed_url
         }
         return render_template("recipe.html", data=data)
-        
+
+@app.route("/basket/<int:mealID>", methods=['GET', 'POST'])
+def show_basket(mealID):
+    if request.method == 'GET':
+        id = mealID
+        name = mealAPI.getMealName(mealID)
+        thumb = mealAPI.getMealThumb(mealID)
+        ingredients = mealAPI.getIngredients(mealID)
+
+        data = {
+            'id': id,
+            'name': name,
+            'thumb': thumb,
+            'ingredients': ingredients
+        }
+
+        return render_template("basket.html", data=data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=env.get("PORT", 3000))
