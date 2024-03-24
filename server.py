@@ -1,7 +1,8 @@
 import json
+import mealAPI
+import warehouseAPI
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
-import mealAPI
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, redirect, render_template, session, url_for, request
@@ -88,6 +89,7 @@ def show_recipe(mealID):
         ingredient_list = [{"ingredient": ing, "measurement": meas} for ing, meas in zip(ingredients, measurements)]
 
         data = {
+            'id': mealID,
             'name': name,
             'thumb': thumb,
             'area': area,
@@ -108,9 +110,9 @@ def show_basket(mealID):
         name = mealAPI.getMealName(mealID)
         thumb = mealAPI.getMealThumb(mealID)
         ingredients = mealAPI.getIngredients(mealID)
-
+        
         data = {
-            'id': id,
+            'id': int(id),
             'name': name,
             'thumb': thumb,
             'ingredients': ingredients
