@@ -93,3 +93,9 @@ def searchMealsByName(query):
     endpoint = url + query
     res = req.get(endpoint).json()
     return res
+
+def getMealsByCategory(query):
+    url = 'www.themealdb.com/api/json/v1/1/filter.php?c='
+    endpoint = url + str(query)
+    res = req.get(endpoint)
+    return res.json()
