@@ -7,6 +7,7 @@
         "dotenv",
         "Monch",
         "searchcategory",
-        "Shoprite"
+        "Shoprite",
+        "userinfo"
     ]
 }
