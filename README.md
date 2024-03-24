@@ -36,7 +36,7 @@ Stay tuned for updates as Monch.club transforms into a social hub. Follow your f
 
 ## 🚀 Let's Get Cooking!
 
-Ready to join the flavor frenzy? Visit https://www.Monch.club to join in on the action! Alternatively, you can clone this repo.
+Ready to join the flavor frenzy? Visit https://Monch.club to join in on the action! Alternatively, you can clone this repo.
 
 ## 📜 License to Thrill
 
