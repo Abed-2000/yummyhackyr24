@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONCH</title>
+    <style>
+      .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh; 
+      }
+
+      .image {
+          margin-bottom: 20px;
+      }
+      .image {
+          margin-bottom: 75px;
+      }
+
+      .button {
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="image">
+      <img src="{{ url_for('static', filename='img/monch3.png') }}" alt="monch3" width="200"/>
+  </div>
+  <button class="button" onclick="window.location.href='/login'">Log In</button>
+</div>  
+
+</body>
+</html>
