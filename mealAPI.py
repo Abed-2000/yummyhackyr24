@@ -1,4 +1,5 @@
 import requests as req
+import re
 
 def getFullMealData(mealID):
     url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
@@ -53,6 +54,13 @@ def getYoutube(mealID):
         return strYoutube
     else:
         print("Instructions not found.")
+
+def extract_youtube_id(url):
+    match = re.search(r'(?<=v=)[^&]+', url)
+    if match:
+        return match.group(0)
+    else:
+        return None
 
 def getIngredients(mealID):
     json = getFullMealData(mealID)
