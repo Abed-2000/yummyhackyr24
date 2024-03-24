@@ -130,6 +130,7 @@ def show_basket(mealID):
         target_results = []
         
         cheapest = {}
+        ingredient_counts = {'Walmart': 0, 'Shoprite': 0, 'Target': 0}
         
         for x in ingredients:
             result = warehouseAPI.checkWalmart(x)
@@ -149,20 +150,33 @@ def show_basket(mealID):
             else:
                 cheapest[x] = 'Target'
             
+            if cheapest[x] == 'Walmart':
+                ingredient_counts['Walmart'] += 1
+            elif cheapest[x] == 'Shoprite':
+                ingredient_counts['Shoprite'] += 1
+            else:
+                ingredient_counts['Target'] += 1
+        
+        most_common_store = max(ingredient_counts, key=ingredient_counts.get)
+        
+        ingredient_prices = []
+        for walmart, shoprite, target, ingredient in zip(walmart_results, shoprite_results, target_results, ingredients):
+            ingredient_prices.append(('Walmart', ingredient, walmart[2]))
+            ingredient_prices.append(('Shoprite', ingredient, shoprite[2]))
+            ingredient_prices.append(('Target', ingredient, target[2]))
+            
         data = {
             'id': id,
             'name': name,
             'thumb': thumb,
-            'ingredients': ingredients,
+            'ingredient_prices': ingredient_prices,
             'cheapest': cheapest,
-            'walmart': walmart_results,
-            'target': target_results,
-            'shoprite': shoprite_results
+            'most_common_store': most_common_store
         }
 
         return render_template("basket.html", data=data)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=env.get("PORT", 3000), debug=True)
 

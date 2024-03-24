@@ -19,13 +19,28 @@
         <h2>{{ data.area }} {{ data.category }}</h2>
         <img src="{{ data.thumb }}" alt="food image"/>
         <br>
-        <h2>Ingredients:</h2>
+        <h2>Store with the best bang for your buck: {{ data.most_common_store }}</h2>
+        <h2>Best Place to Buy Each Ingredient:</h2>
         <ul>
-            {% for item in data.ingredients %}
-                <li>{{ item.ingredient }}</li>
+            {% for ingredient, store in data.cheapest.items() %}
+                <li>{{ ingredient }} - {{ store }}</li>
             {% endfor %}
         </ul>
-
+        <h2>Vendor Cost Overview:</h2>
+        <table>
+            <tr>
+                <th>Store</th>
+                <th>Ingredient</th>
+                <th>Price</th>
+            </tr>
+            {% for store, ingredient, price in data.ingredient_prices %}
+                <tr>
+                    <td>{{ store }}</td>
+                    <td>{{ ingredient }}</td>
+                    <td>${{ price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 </body>
 </html>
