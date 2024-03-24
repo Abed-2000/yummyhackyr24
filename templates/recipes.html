@@ -6,28 +6,24 @@
     <div class="row h-100">
         <div class="col-md-3 sidebar grey-bg p-0">
           <ul class="list-group">
-            <li class="list-group-item">
-                <a class="side-link" href="#">Categorie</a>
-            </li>
-            <li class="list-group-item">
-                <a class="side-link" href="#">Placeholer2</a>
-            </li>
-            <li class="list-group-item">
-                <a class="side-link" href="#">Non-Fiction</a>
-            </li>
-            <li class="list-group-item">
-                <a class="side-link" href="#">Science Fiction</a>
-            </li>
-            <li class="list-group-item">
-                <a class="side-link" href="#">Mystery</a>
-            </li>
+            {% if categories %}
+                {% for category in categories %}
+                <li class="list-group-item">
+                    <a class="side-link" href="#">{{ category }}</a>
+                </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item">
+                    <a class="side-link" href="#">Error. No Categories</a>
+                </li>
+            {% endif %}
           </ul>
         </div>
         
         <!-- Main Content -->
         <div class="col-md-9">
             <br />
-            <h2>All Desserts</h2>
+            <h2 id="mealstitle">All {{ categories[0] }} Meals</h2>
             <hr>
             <div class="container">
                 <div class="row w-100 p-1">

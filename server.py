@@ -82,14 +82,16 @@ def show_recipe(mealID):
         ingredients = mealAPI.getIngredients(mealID)
         measurements = mealAPI.getMeasurements(mealID)
         youtube = mealAPI.getYoutube(mealID)
+        
+        ingredient_list = [{"ingredient": ing, "measurement": meas} for ing, meas in zip(ingredients, measurements)]
+
         data = {
             'name': name,
             'thumb': thumb,
             'area': area,
             'category': category,
             'instructions': instructions,
-            'ingredients': ingredients,
-            'measurements': measurements,
+            'ingredients': ingredient_list,
             'youtube': youtube
         }
         
@@ -114,7 +116,11 @@ def show_basket(mealID):
 
         return render_template("basket.html", data=data)
 
+@app.route("/recipes")
+def allrecipes():
+    categories = mealAPI.getMealCategories()
+    return render_template("recipes.html", categories = categories)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=env.get("PORT", 3000), debug=True)
 
