@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monch Club</title>
+</head>
+<body>
+    {% if session %}
+        <p><a href="/search">Search</a></p>
+        <p><a href="/logout">Logout</a></p>
+    {% else %}
+        <h1>Welcome Guest</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+
+    {% if data %}
+        <h1>{{ data.name }}</h1>
+        <h2>{{ data.area }} {{ data.category }}</h2>
+        <img src="{{ data.thumb }}" alt="food image"/>
+        <br>
+        <button type="button">Like &lt;3</button>
+        <h2>Instructions:</h2>
+        <p>{{ data.instructions }}</p>
+        <h2>Ingredients:</h2>
+        <ul>
+            {% for ingredient, measurement in data.ingredients %}
+                <li>{{ measurement }} {{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3><button href="/basket/{{data.id}}">Generate Basket</button></h3>
+        <h2>Video Tutorial:</h2>
+            <iframe width="560" height="315" src="{{ data.youtube + "?autoplay=1&mute=1"}}" frameborder="0" allowfullscreen></iframe>
+    </iframe>
+
+    {% endif %}
+</body>
+</html>
