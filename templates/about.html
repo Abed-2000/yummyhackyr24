@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br><br>
+<div>
+  <img src="{{ url_for('static', filename='img/monch1.png') }}" alt="CAT" class="center">
+</div>      
+
+<div class="text-container text-center">
+
+  <br><br>        
+  <h1>Welcome {{session.userinfo.name}}!</h1>
+  <h4>Welcome to the MONCH club. Let's get cooking! &#128293;</h4>
   
+</div>
 
 {% endblock %}
