@@ -1,39 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monch Club</title>
-</head>
-<body>
-    {% if session %}
-        <p><a href="/search">Search</a></p>
-        <p><a href="/logout">Logout</a></p>
-    {% else %}
-        <h1>Welcome Guest</h1>
-        <p><a href="/login">Login</a></p>
-    {% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <br><br>
+    <div class="container p-1">
+
 
     {% if data %}
         <h1>{{ data.name }}</h1>
-        <h2>{{ data.area }} {{ data.category }}</h2>
-        <img src="{{ data.thumb }}" alt="food image"/>
-        <br>
-        <button type="button">Like &lt;3</button>
-        <h2>Instructions:</h2>
-        <p>{{ data.instructions }}</p>
-        <h2>Ingredients:</h2>
-        <ul>
-            {% for item in data.ingredients %}
-                <li>{{ item.measurement }} {{ item.ingredient }}</li>
-            {% endfor %}
-        </ul>
+        <h2 class="p-2">{{ data.area }} {{ data.category }}</h2>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                <img class= "pt-2 img-fluid" src="{{ data.thumb }}" alt="food image"/>
+                <br>
+                <div class="pt-3">
+                    <button class="btn btn-secondary" type="button">Like &lt;3</button>
+                </div>
+                <div class="pt-3">
+                    <h2>Ingredients:</h2>
+                    <ul>
+                        {% for item in data.ingredients %}
+                            <li>{{ item.measurement }} {{ item.ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="pt-3">
+                    <a class="btn btn-success" href="/basket/{{data.id}}">Find in Store</a>              
+                </div>
 
-        <h3><a href="/basket/{{data.id}}">Generate Basket</a></h3>
-        <h2>Video Tutorial:</h2>
-        <iframe width="560" height="315" src="{{ data.youtube }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="col">
+                <h2>Instructions:</h2>
+                <p>{{ data.instructions }}</p>
+                <div class="pt-3">
+                    <h2>Video Tutorial:</h2>
+                    <iframe width="560" height="315" src="{{ data.youtube }}" frameborder="0" allowfullscreen></iframe>  
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+
+    </div>
 
 
     {% endif %}
-</body>
-</html>
+{% endblock %}

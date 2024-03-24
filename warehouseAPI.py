@@ -7,8 +7,7 @@ def checkWalmart(query):
     for i in jsonRes:
         if query.lower() in (i["Name"]).lower():
             return ("Walmart"), (i["Name"]).replace(" ", ""), (i["Price"]).replace(" $", "")
-        else:
-            return ("Walmart"), (query), ("Not found.")
+    return ("Walmart"), (query), ("Not found.")
 
 def checkShoprite(query):
     url = "http://leonsnet.cc:8443/getShopriteInventory"
@@ -17,8 +16,7 @@ def checkShoprite(query):
     for i in jsonRes:
         if query.lower() in (i["Name"]).lower():
             return ("Walmart"), (i["Name"]).replace(" ", ""), (i["Price"]).replace(" $", "")
-        else:
-            return ("Shoprite"), (query), ("Not found.")
+    return ("Shoprite"), (query), ("Not found.")
 
         
 def checkTarget(query):
@@ -28,6 +26,5 @@ def checkTarget(query):
     for i in jsonRes:
         if query.lower() in (i["Name"]).lower():
             return ("Target"), (i["Name"]).replace(" ", ""), (i["Price"]).replace(" $", "")
-        else:
-            return ("Target"), (query), ("Not found.")
+    return ("Target"), (query), ("Not found.")
             

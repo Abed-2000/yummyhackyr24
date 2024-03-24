@@ -19,11 +19,12 @@
         <h2>{{ data.area }} {{ data.category }}</h2>
         <img src="{{ data.thumb }}" alt="food image"/>
         <br>
-   
-        <h3><a href="/basket/{{data.id}}">Generate Basket</a></h3>
-        <h2>Video Tutorial:</h2>
-        <iframe width="560" height="315" src="{{ data.youtube }}" frameborder="0" allowfullscreen></iframe>
-
+        <h2>Ingredients:</h2>
+        <ul>
+            {% for item in data.ingredients %}
+                <li>{{ item.ingredient }}</li>
+            {% endfor %}
+        </ul>
 
     {% endif %}
 </body>

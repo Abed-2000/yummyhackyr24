@@ -124,12 +124,40 @@ def show_basket(mealID):
         name = mealAPI.getMealName(mealID)
         thumb = mealAPI.getMealThumb(mealID)
         ingredients = mealAPI.getIngredients(mealID)
+        
+        walmart_results = []
+        shoprite_results = []
+        target_results = []
+        
+        cheapest = {}
+        
+        for x in ingredients:
+            result = warehouseAPI.checkWalmart(x)
+            walmart_results.append((result[0], result[1], float(result[2])))
 
+            result = warehouseAPI.checkShoprite(x)
+            shoprite_results.append((result[0], result[1], float(result[2])))
+            
+            result = warehouseAPI.checkTarget(x)
+            target_results.append((result[0], result[1], float(result[2])))
+
+            cheapest_ingredient = min(walmart_results[-1][2], shoprite_results[-1][2], target_results[-1][2])
+            if cheapest_ingredient == walmart_results[-1][2]:
+                cheapest[x] = 'Walmart'
+            elif cheapest_ingredient == shoprite_results[-1][2]:
+                cheapest[x] = 'Shoprite'
+            else:
+                cheapest[x] = 'Target'
+            
         data = {
             'id': id,
             'name': name,
             'thumb': thumb,
-            'ingredients': ingredients
+            'ingredients': ingredients,
+            'cheapest': cheapest,
+            'walmart': walmart_results,
+            'target': target_results,
+            'shoprite': shoprite_results
         }
 
         return render_template("basket.html", data=data)
