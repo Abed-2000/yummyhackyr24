@@ -67,6 +67,10 @@ def search():
             return 'No query provided'
     else:
         return render_template("search.html")
+    
+@app.route("/recipe")
+def defaultRecipe():
+    return render_template("search.html")
 
 @app.route("/recipe/<int:mealID>", methods=['GET'])
 def show_recipe(mealID):
@@ -78,21 +82,20 @@ def show_recipe(mealID):
         instructions = mealAPI.getInstructions(mealID)
         ingredients = mealAPI.getIngredients(mealID)
         measurements = mealAPI.getMeasurements(mealID)
-        youtube = mealAPI.getYoutube(mealID)
+        youtube_link = mealAPI.getYoutube(mealID)
+        youtube_id = mealAPI.extract_youtube_id(youtube_link)
+        youtube_embed_url = f"https://www.youtube.com/embed/{youtube_id}"
+
         data = {
             'name': name,
             'thumb': thumb,
             'area': area,
             'category': category,
             'instructions': instructions,
-            'ingredients': ingredients,
-            'measurements': measurements,
-            'youtube': youtube
+            'ingredients': list(zip(ingredients, measurements)),
+            'youtube': youtube_embed_url
         }
-        
         return render_template("recipe.html", data=data)
-    else:
-        return render_template("search.html")
         
 
 if __name__ == "__main__":

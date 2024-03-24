@@ -15,11 +15,24 @@
     {% endif %}
     
     {% if data %}
-        <h2>{{data.name}}</h2>
-        <h3>{{data.area}} {{data.category}}</h3>
-        <img src="{{data.thumb}}" alt="food image"/>
+        <h1>{{ data.name }}</h1>
+        <h2>{{ data.area }} {{ data.category }}</h2>
+        <img src="{{ data.thumb }}" alt="food image"/>
+        <br>
+        <button type="button">Like &lt;3</button>
+        <h2>Instructions:</h2>
         <p>{{ data.instructions }}</p>
-        <p></p>
+        <h2>Ingredients:</h2>
+        <ul>
+            {% for ingredient, measurement in data.ingredients %}
+                <li>{{ measurement }} {{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+        <h3><a href="">Generate Basket</a></h3>
+        <h2>Video Tutorial:</h2>
+            <iframe width="560" height="315" src="{{ data.youtube + "?autoplay=1&mute=1"}}" frameborder="0" allowfullscreen></iframe>
+    </iframe>
+
     {% endif %}
 </body>
 </html>
