@@ -1,8 +1,9 @@
 import json
 import mealAPI
-import warehouseAPI
+import warehouseAPI as warehouseAPI
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
+import mealAPI
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
 from flask import Flask, redirect, render_template, session, url_for, request
@@ -59,6 +60,19 @@ def home():
         return render_template("about.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
     else:
         return render_template("login.html")
+    
+@app.route("/recipes")
+def allrecipes():
+    categories = mealAPI.getMealCategories()
+    return render_template('recipes.html', categories=categories)
+
+@app.route("/recipes/searchcategory", methods=['POST'])
+def searchcategory():
+    if request.method == 'POST':
+        content = request.get_json(silent=True)
+        query = content['category']
+        categoryrecipes = mealAPI.getMealsByCategory(query)
+        return(categoryrecipes)
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
@@ -110,20 +124,17 @@ def show_basket(mealID):
         name = mealAPI.getMealName(mealID)
         thumb = mealAPI.getMealThumb(mealID)
         ingredients = mealAPI.getIngredients(mealID)
-        
+
         data = {
-            'id': int(id),
+            'id': id,
             'name': name,
             'thumb': thumb,
             'ingredients': ingredients
         }
+
         return render_template("basket.html", data=data)
 
-@app.route("/recipes")
-def allrecipes():
-    categories = mealAPI.getMealCategories()
-    return render_template("recipes.html", categories = categories)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=env.get("PORT", 3000), debug=True)
+    app.run(host="0.0.0.0", port=env.get("PORT", 3000))
 

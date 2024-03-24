@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
+    <body onload="getAllRecipes('{{ categories[0]}}');"></body>
+
     <!-- Sidebar -->
     <div class="row h-100">
         <div class="col-md-3 sidebar grey-bg p-0">
@@ -9,12 +10,12 @@
             {% if categories %}
                 {% for category in categories %}
                 <li class="list-group-item">
-                    <a class="side-link" href="#">{{ category }}</a>
+                    <a class="side-link" onclick="getAllRecipes('{{ category }}')">{{ category }}</a>
                 </li>
                 {% endfor %}
             {% else %}
                 <li class="list-group-item">
-                    <a class="side-link" href="#">Error. No Categories</a>
+                    <a class="side-link">Error. No Categories</a>
                 </li>
             {% endif %}
           </ul>
@@ -26,25 +27,8 @@
             <h2 id="mealstitle">All {{ categories[0] }} Meals</h2>
             <hr>
             <div class="container">
-                <div class="row w-100 p-1">
-                    <div class="card w-100">
-                        <div class="card-body">
-                          <h5 class="card-title">Recipe 1</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                          <a href="#" class="btn btn-primary">Ingredients</a>
-                        </div>
-                    </div>
-                </div>
+                <div id="startRecipesObject"></div>
 
-                <div class="row w-100 p-1">
-                    <div class="card w-100">
-                        <div class="card-body">
-                          <h5 class="card-title">Recipe 2</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                          <a href="#" class="btn btn-primary">Ingredients</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
