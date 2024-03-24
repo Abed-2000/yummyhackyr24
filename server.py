@@ -78,13 +78,14 @@ def searchcategory():
 def search():
     if request.method == 'POST':
         query = request.form.get('query')
-        if query:
+        try:
             result = mealAPI.searchMealsByName(query)
             return render_template("customsearch.html", data=result)
-        else:
-            return 'No query provided'
+        except:
+            return render_template("about.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
+
     else:
-        return render_template("recipes.html")
+        return render_template("about.html", session=session.get('user'), pretty=json.dumps(session.get('user'), indent=4))
 
 
 @app.route("/recipe/<int:mealID>", methods=['GET'])

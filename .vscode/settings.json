@@ -3,6 +3,7 @@
         "allrecipes",
         "authlib",
         "categoryrecipes",
+        "customsearch",
         "dotenv",
         "Monch",
         "searchcategory",
