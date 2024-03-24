@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monch Club</title>
+</head>
+<body>
+    {% if session %}
+        <p><a href="/search">Search</a></p>
+        <p><a href="/logout">Logout</a></p>
+    {% else %}
+        <h1>Welcome Guest</h1>
+        <p><a href="/login">Login</a></p>
+    {% endif %}
+    
+    {% if data %}
+        <h2>{{data.name}}</h2>
+        <h3>{{data.area}} {{data.category}}</h3>
+        <img src="{{data.thumb}}" alt="food image"/>
+        <p>{{ data.instructions }}</p>
+        <p></p>
+    {% endif %}
+</body>
+</html>

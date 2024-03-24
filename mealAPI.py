@@ -14,6 +14,22 @@ def getMealName(mealID):
     else:
         print("Meal not found.")
 
+def getMealCategory(mealID):
+    json = getFullMealData(mealID)
+    if json['meals']:
+        strCategory = json['meals'][0]['strCategory']
+        return strCategory
+    else:
+        print("Meal not found.")
+
+def getMealArea(mealID):
+    json = getFullMealData(mealID)
+    if json['meals']:
+        strArea = json['meals'][0]['strArea']
+        return strArea
+    else:
+        print("Meal not found.")        
+
 def getMealThumb(mealID):
     json = getFullMealData(mealID)
     if json['meals']:
@@ -69,6 +85,3 @@ def searchMealsByName(query):
     endpoint = url + query
     res = req.get(endpoint).json()
     return res
-
-
-print(searchMealsByName('cake'))
